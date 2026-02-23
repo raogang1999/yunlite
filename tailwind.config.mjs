@@ -4,7 +4,7 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        serif: ['"Noto Serif SC"', 'Georgia', 'serif'],
+        serif: ['"LXGW WenKai"', 'Georgia', 'serif'],
         sans: ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
       },
       colors: {
