@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>蕴光工作室 | Yunlite Studio</title>
+    <meta name="description" content="让技术，服务于人的自我实现。蕴光工作室致力于用 AI 技术帮助每个人成为更好的自己。">
+    <meta name="theme-color" content="#FAFAF8">
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        serif: ['"Noto Serif SC"', 'Georgia', 'serif'],
+                        sans: ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
+                    },
+                    colors: {
+                        warm: {
+                            50:  '#FFFDF7',
+                            100: '#FEF7E0',
+                            200: '#FDEDB8',
+                            300: '#FBDF85',
+                            400: '#F5C843',
+                            500: '#E5A91B',
+                            600: '#C8860F',
+                            700: '#A66511',
+                            800: '#884F15',
+                            900: '#714117',
+                        },
+                        sage: {
+                            50:  '#F6F8F4',
+                            100: '#E9EFE4',
+                            200: '#D3DFCB',
+                            300: '#B2C7A5',
+                            400: '#8DAA7B',
+                            500: '#6E8E5D',
+                            600: '#577248',
+                            700: '#455A3A',
+                            800: '#394932',
+                            900: '#303E2B',
+                        },
+                        cream: {
+                            50: '#FEFDFB',
+                            100: '#FAF8F4',
+                            200: '#F3EFE8',
+                            300: '#E8E2D8',
+                        }
+                    },
+                    animation: {
+                        'float': 'float 6s ease-in-out infinite',
+                        'glow': 'glow 3s ease-in-out infinite',
+                        'fade-up': 'fadeUp 0.8s ease-out forwards',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0px)' },
+                            '50%': { transform: 'translateY(-12px)' },
+                        },
+                        glow: {
+                            '0%, 100%': { opacity: '0.4' },
+                            '50%': { opacity: '0.8' },
+                        },
+                        fadeUp: {
+                            '0%': { opacity: '0', transform: 'translateY(30px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Serif+SC:wght@400;600;700&display=swap" rel="stylesheet">
+
+    <!-- Inline Favicon -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>✦</text></svg>">
+
+    <style>
+        /* --- Base & Custom Styles --- */
+        body {
+            background-color: #FAFAF8;
+            color: #3F3F3F;
+        }
+
+        /* Warm gradient text */
+        .text-warm-gradient {
+            background: linear-gradient(135deg, #C8860F 0%, #E5A91B 40%, #D4762A 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Nav glass effect */
+        .nav-glass {
+            background: rgba(250, 250, 248, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+
+        /* Section reveal animation */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Hero decorative ring */
+        .hero-ring {
+            position: absolute;
+            border-radius: 50%;
+            border: 1px solid rgba(229, 169, 27, 0.15);
+        }
+
+        /* Subtle dot pattern */
+        .dot-pattern {
+            background-image: radial-gradient(circle, #D9D3C7 0.8px, transparent 0.8px);
+            background-size: 24px 24px;
+        }
+
+        /* Product card glow on hover */
+        .product-card {
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+        }
+        .product-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 20px 60px -15px rgba(200, 134, 15, 0.15),
+                        0 8px 24px -8px rgba(0, 0, 0, 0.06);
+        }
+
+        /* Smooth highlight bar */
+        .highlight-bar {
+            position: relative;
+        }
+        .highlight-bar::after {
+            content: '';
+            position: absolute;
+            bottom: 2px;
+            left: 0;
+            width: 100%;
+            height: 8px;
+            background: linear-gradient(90deg, rgba(229, 169, 27, 0.2), rgba(110, 142, 93, 0.15));
+            border-radius: 4px;
+            z-index: -1;
+        }
+
+        /* Custom scrollbar */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: #D9D3C7; border-radius: 3px; }
+        ::-webkit-scrollbar-thumb:hover { background: #B8B0A2; }
+
+        /* Feature icon circle */
+        .feature-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+    </style>
+</head>
+
+<body class="font-sans antialiased overflow-x-hidden">
+
+    <!-- ═══════════════════════════ Navigation ═══════════════════════════ -->
+    <nav id="navbar" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300">
+        <div class="max-w-5xl mx-auto px-6 py-5 flex items-center justify-between">
+            <!-- Logo -->
+            <a href="#" class="flex items-center gap-2.5 group">
+                <span class="text-warm-gradient font-serif text-xl font-bold tracking-wide">蕴光</span>
+                <span class="text-xs tracking-[0.2em] text-gray-400 font-light uppercase hidden sm:inline">Yunlite Studio</span>
+            </a>
+            <!-- Links -->
+            <div class="flex items-center gap-6 text-sm">
+                <a href="#philosophy" class="text-gray-500 hover:text-warm-600 transition-colors duration-200">理念</a>
+                <a href="#products" class="text-gray-500 hover:text-warm-600 transition-colors duration-200">产品</a>
+                <a href="#contact" class="text-gray-500 hover:text-warm-600 transition-colors duration-200">联系</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ═══════════════════════════ Hero Section ═══════════════════════════ -->
+    <section class="relative min-h-[92vh] flex items-center justify-center overflow-hidden">
+        <!-- Background decorative elements -->
+        <div class="absolute inset-0 pointer-events-none">
+            <!-- Warm gradient overlay at top -->
+            <div class="absolute top-0 left-0 right-0 h-[500px] bg-gradient-to-b from-warm-50/60 to-transparent"></div>
+            <!-- Decorative rings -->
+            <div class="hero-ring w-[400px] h-[400px] top-[10%] right-[-100px] animate-float opacity-40"></div>
+            <div class="hero-ring w-[280px] h-[280px] bottom-[15%] left-[-60px] animate-float opacity-30" style="animation-delay: -2s;"></div>
+            <!-- Subtle glow orb -->
+            <div class="absolute top-1/3 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-gradient-radial rounded-full animate-glow"
+                 style="background: radial-gradient(ellipse, rgba(229, 169, 27, 0.06) 0%, transparent 70%);"></div>
+        </div>
+
+        <!-- Hero content -->
+        <div class="relative z-10 text-center px-6 max-w-3xl mx-auto">
+            <!-- Studio name -->
+            <h1 class="font-serif font-bold text-5xl sm:text-6xl md:text-7xl mb-3 text-warm-gradient leading-tight">
+                蕴光
+            </h1>
+            <p class="text-xs sm:text-sm tracking-[0.35em] text-gray-400 font-light uppercase mb-10">
+                Yunlite Studio
+            </p>
+
+            <!-- Tagline -->
+            <p class="font-serif text-xl sm:text-2xl md:text-3xl text-gray-700 leading-relaxed mb-6 font-semibold">
+                让技术，服务于人的<span class="highlight-bar">自我实现</span>
+            </p>
+
+            <!-- Sub-description -->
+            <p class="text-gray-500 text-base sm:text-lg leading-relaxed max-w-xl mx-auto mb-12 font-light">
+                我们相信每个人心中都有一个想要成为的自己。<br class="hidden sm:block">
+                用 AI 与技术，为你的成长之路铺路。
+            </p>
+
+            <!-- CTA -->
+            <a href="#products" class="inline-flex items-center gap-2 px-7 py-3.5 bg-gray-800 text-white rounded-full text-sm font-medium
+                                       hover:bg-gray-700 transition-all duration-300 shadow-lg shadow-gray-900/10 hover:shadow-xl hover:shadow-gray-900/15">
+                探索产品
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"></path>
+                </svg>
+            </a>
+        </div>
+
+        <!-- Scroll indicator -->
+        <div class="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 opacity-40">
+            <div class="w-5 h-8 border-2 border-gray-400 rounded-full flex items-start justify-center p-1">
+                <div class="w-1 h-2 bg-gray-400 rounded-full animate-bounce"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════ Philosophy Section ═══════════════════════════ -->
+    <section id="philosophy" class="py-24 sm:py-32">
+        <div class="max-w-4xl mx-auto px-6">
+            <div class="reveal">
+                <!-- Section title -->
+                <div class="flex items-center gap-4 mb-16">
+                    <div class="w-8 h-[1px] bg-warm-400"></div>
+                    <span class="text-xs tracking-[0.3em] text-warm-600 uppercase font-medium">Philosophy</span>
+                    <div class="flex-1 h-[1px] bg-cream-300"></div>
+                </div>
+
+                <!-- Philosophy content -->
+                <div class="space-y-8">
+                    <h2 class="font-serif text-2xl sm:text-3xl text-gray-800 font-semibold leading-relaxed">
+                        我们的理念
+                    </h2>
+
+                    <div class="pl-6 border-l-2 border-warm-200 space-y-6">
+                        <p class="text-gray-600 text-base sm:text-lg leading-[1.9] font-light">
+                            每个人心中都有一个想要成为的自己。有人想开一家温暖的店，有人想创造一件有意义的产品，有人想在一个领域里不断精进、活出深度——这些看似平凡的念头，其实是人生最珍贵的部分。
+                        </p>
+                        <p class="text-gray-600 text-base sm:text-lg leading-[1.9] font-light">
+                            我们想做的，就是用技术，为这份努力铺路。AI 也好，软件也好——它们不应该只是冷冰冰的工具，而应该是你成长路上的伙伴。帮你少走一些弯路，帮你看清前方的路，帮你在日复一日的坚持中，离那个想成为的自己，更近一点。
+                        </p>
+                    </div>
+
+                    <!-- Highlight quote -->
+                    <div class="mt-12 pt-8">
+                        <p class="font-serif text-xl sm:text-2xl text-gray-800 text-center font-semibold leading-relaxed">
+                            「 你负责向前走，剩下的，<span class="text-warm-gradient">交给技术</span>。」
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════ Values Section ═══════════════════════════ -->
+    <section class="py-20 bg-cream-100/50">
+        <div class="max-w-5xl mx-auto px-6">
+            <div class="reveal">
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-8 sm:gap-12">
+                    <!-- Value 1 -->
+                    <div class="text-center space-y-3">
+                        <div class="w-12 h-12 mx-auto rounded-2xl bg-warm-100 flex items-center justify-center">
+                            <svg class="w-6 h-6 text-warm-600" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.455 2.456L21.75 6l-1.036.259a3.375 3.375 0 00-2.455 2.456z"/>
+                            </svg>
+                        </div>
+                        <h3 class="font-serif text-gray-800 font-semibold">AI 驱动</h3>
+                        <p class="text-gray-500 text-sm leading-relaxed font-light">以前沿 AI 技术为核心<br>让每一次交互都智能而有温度</p>
+                    </div>
+                    <!-- Value 2 -->
+                    <div class="text-center space-y-3">
+                        <div class="w-12 h-12 mx-auto rounded-2xl bg-sage-100 flex items-center justify-center">
+                            <svg class="w-6 h-6 text-sage-600" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z"/>
+                            </svg>
+                        </div>
+                        <h3 class="font-serif text-gray-800 font-semibold">以人为本</h3>
+                        <p class="text-gray-500 text-sm leading-relaxed font-light">技术服务于人，而非取代人<br>尊重每个人独特的成长节奏</p>
+                    </div>
+                    <!-- Value 3 -->
+                    <div class="text-center space-y-3">
+                        <div class="w-12 h-12 mx-auto rounded-2xl bg-amber-50 flex items-center justify-center">
+                            <svg class="w-6 h-6 text-amber-600" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 18L9 11.25l4.306 4.307a11.95 11.95 0 015.814-5.519l2.74-1.22m0 0l-5.94-2.28m5.94 2.28l-2.28 5.941"/>
+                            </svg>
+                        </div>
+                        <h3 class="font-serif text-gray-800 font-semibold">持续成长</h3>
+                        <p class="text-gray-500 text-sm leading-relaxed font-light">科学的方法论与数据追踪<br>让每一步进步清晰可见</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════ Products Section ═══════════════════════════ -->
+    <section id="products" class="py-24 sm:py-32">
+        <div class="max-w-5xl mx-auto px-6">
+            <div class="reveal">
+                <!-- Section title -->
+                <div class="flex items-center gap-4 mb-16">
+                    <div class="w-8 h-[1px] bg-warm-400"></div>
+                    <span class="text-xs tracking-[0.3em] text-warm-600 uppercase font-medium">Products</span>
+                    <div class="flex-1 h-[1px] bg-cream-300"></div>
+                </div>
+
+                <h2 class="font-serif text-2xl sm:text-3xl text-gray-800 font-semibold mb-12">
+                    我们的产品
+                </h2>
+
+                <!-- Voxia Product Card -->
+                <a href="https://talk.yunlite.com" target="_blank" rel="noopener"
+                   class="product-card block bg-white rounded-3xl border border-cream-300 overflow-hidden shadow-sm">
+                    <div class="flex flex-col md:flex-row">
+                        <!-- Left: Visual -->
+                        <div class="md:w-2/5 bg-gradient-to-br from-warm-50 via-cream-100 to-sage-50 p-8 sm:p-12 flex items-center justify-center">
+                            <div class="text-center space-y-4">
+                                <!-- Voxia Logo Mark -->
+                                <div class="relative inline-block">
+                                    <div class="w-20 h-20 mx-auto rounded-2xl bg-white shadow-lg shadow-warm-200/40 flex items-center justify-center">
+                                        <svg class="w-10 h-10" viewBox="0 0 48 48" fill="none">
+                                            <!-- Speech bubble shape -->
+                                            <path d="M8 12C8 9.79 9.79 8 12 8H36C38.21 8 40 9.79 40 12V28C40 30.21 38.21 32 36 32H18L12 38V32H12C9.79 32 8 30.21 8 28V12Z"
+                                                  fill="url(#voxia-grad)" opacity="0.9"/>
+                                            <!-- Spark inside -->
+                                            <circle cx="18" cy="20" r="2" fill="white" opacity="0.9"/>
+                                            <circle cx="24" cy="20" r="2" fill="white" opacity="0.9"/>
+                                            <circle cx="30" cy="20" r="2" fill="white" opacity="0.9"/>
+                                            <defs>
+                                                <linearGradient id="voxia-grad" x1="8" y1="8" x2="40" y2="38">
+                                                    <stop offset="0%" stop-color="#E5A91B"/>
+                                                    <stop offset="100%" stop-color="#6E8E5D"/>
+                                                </linearGradient>
+                                            </defs>
+                                        </svg>
+                                    </div>
+                                </div>
+                                <div>
+                                    <h3 class="text-2xl font-bold text-gray-800 tracking-wide">Voxia</h3>
+                                    <p class="text-sm text-gray-500 mt-1">AI 社交技能训练</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Right: Description -->
+                        <div class="md:w-3/5 p-8 sm:p-12 flex flex-col justify-center">
+                            <div class="inline-flex items-center gap-1.5 px-3 py-1 bg-sage-50 text-sage-600 text-xs font-medium rounded-full w-fit mb-5">
+                                <span class="w-1.5 h-1.5 bg-sage-500 rounded-full animate-pulse"></span>
+                                即将上线
+                            </div>
+
+                            <p class="text-gray-600 leading-[1.8] mb-6">
+                                在真实场景中与 AI 对话练习，获得即时反馈与个性化评估。无论是日常闲聊、职场沟通还是情感表达，Voxia 帮你在安全的环境中反复练习，逐步建立社交自信。
+                            </p>
+
+                            <!-- Features -->
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-8">
+                                <div class="flex items-center gap-3">
+                                    <div class="feature-icon bg-warm-50">
+                                        <svg class="w-5 h-5 text-warm-500" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M7.5 8.25h9m-9 3H12m-9.75 1.51c0 1.6 1.123 2.994 2.707 3.227 1.087.16 2.185.283 3.293.369V21l4.076-4.076a1.526 1.526 0 011.037-.443 48.282 48.282 0 005.68-.494c1.584-.233 2.707-1.626 2.707-3.228V6.741c0-1.602-1.123-2.995-2.707-3.228A48.394 48.394 0 0012 3c-2.392 0-4.744.175-7.043.513C3.373 3.746 2.25 5.14 2.25 6.741v6.018z"/>
+                                        </svg>
+                                    </div>
+                                    <span class="text-sm text-gray-600">真实场景对话练习</span>
+                                </div>
+                                <div class="flex items-center gap-3">
+                                    <div class="feature-icon bg-sage-50">
+                                        <svg class="w-5 h-5 text-sage-500" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 3v11.25A2.25 2.25 0 006 16.5h2.25M3.75 3h-1.5m1.5 0h16.5m0 0h1.5m-1.5 0v11.25A2.25 2.25 0 0118 16.5h-2.25m-7.5 0h7.5m-7.5 0l-1 3m8.5-3l1 3m0 0l.5 1.5m-.5-1.5h-9.5m0 0l-.5 1.5m.75-9l3-3 2.148 2.148A12.061 12.061 0 0116.5 7.605"/>
+                                        </svg>
+                                    </div>
+                                    <span class="text-sm text-gray-600">AI 智能评估与反馈</span>
+                                </div>
+                                <div class="flex items-center gap-3">
+                                    <div class="feature-icon bg-amber-50">
+                                        <svg class="w-5 h-5 text-amber-500" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M4.26 10.147a60.436 60.436 0 00-.491 6.347A48.627 48.627 0 0112 20.904a48.627 48.627 0 018.232-4.41 60.46 60.46 0 00-.491-6.347m-15.482 0a50.57 50.57 0 00-2.658-.813A59.905 59.905 0 0112 3.493a59.902 59.902 0 0110.399 5.84c-.896.248-1.783.52-2.658.814m-15.482 0A50.697 50.697 0 0112 13.489a50.702 50.702 0 017.74-3.342M6.75 15a.75.75 0 100-1.5.75.75 0 000 1.5zm0 0v-3.675A55.378 55.378 0 0112 8.443m-7.007 11.55A5.981 5.981 0 006.75 15.75v-1.5"/>
+                                        </svg>
+                                    </div>
+                                    <span class="text-sm text-gray-600">7 大技能体系</span>
+                                </div>
+                                <div class="flex items-center gap-3">
+                                    <div class="feature-icon bg-rose-50">
+                                        <svg class="w-5 h-5 text-rose-400" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z"/>
+                                        </svg>
+                                    </div>
+                                    <span class="text-sm text-gray-600">安全无压力的练习环境</span>
+                                </div>
+                            </div>
+
+                            <!-- CTA -->
+                            <div class="flex items-center gap-2 text-warm-600 font-medium text-sm group">
+                                <span>了解更多</span>
+                                <svg class="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- More coming hint -->
+                <div class="mt-12 text-center">
+                    <p class="text-gray-400 text-sm font-light">更多产品，正在路上 ✦</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════ Contact Section ═══════════════════════════ -->
+    <section id="contact" class="py-20 bg-cream-100/50 dot-pattern">
+        <div class="max-w-3xl mx-auto px-6 text-center">
+            <div class="reveal">
+                <h2 class="font-serif text-2xl sm:text-3xl text-gray-800 font-semibold mb-4">
+                    联系我们
+                </h2>
+                <p class="text-gray-500 text-base font-light mb-8">
+                    有任何想法、建议或合作意向，欢迎联系
+                </p>
+                <a href="mailto:hello@yunlite.com"
+                   class="inline-flex items-center gap-2 px-6 py-3 border border-cream-300 rounded-full text-gray-600 text-sm
+                          hover:border-warm-300 hover:text-warm-700 transition-all duration-300 bg-white/60">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75"/>
+                    </svg>
+                    hello@yunlite.com
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════ Footer ═══════════════════════════ -->
+    <footer class="py-10 border-t border-cream-200">
+        <div class="max-w-5xl mx-auto px-6">
+            <div class="flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-gray-400">
+                <div class="flex items-center gap-2">
+                    <span class="text-warm-gradient font-serif font-semibold">蕴光</span>
+                    <span>&copy; 2026 蕴光工作室</span>
+                </div>
+                <div class="flex items-center gap-4">
+                    <!-- ICP 备案号（待填写） -->
+                    <a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener"
+                       class="hover:text-gray-600 transition-colors">
+                        蜀ICP备XXXXXXXX号
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ═══════════════════════════ Scripts ═══════════════════════════ -->
+    <script>
+        // --- Scroll Reveal ---
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+        // --- Navbar background on scroll ---
+        const navbar = document.getElementById('navbar');
+        let lastScroll = 0;
+
+        window.addEventListener('scroll', () => {
+            const currentScroll = window.pageYOffset;
+
+            if (currentScroll > 60) {
+                navbar.classList.add('nav-glass', 'border-b', 'border-cream-200', 'shadow-sm');
+            } else {
+                navbar.classList.remove('nav-glass', 'border-b', 'border-cream-200', 'shadow-sm');
+            }
+
+            lastScroll = currentScroll;
+        }, { passive: true });
+
+        // --- Smooth scroll for anchor links ---
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
