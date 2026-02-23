@@ -1,0 +1,92 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ── Base ── */
+body {
+  background-color: #FAFAF8;
+  color: #3F3F3F;
+}
+
+/* ── Warm gradient text ── */
+.text-warm-gradient {
+  background: linear-gradient(135deg, #C8860F 0%, #E5A91B 40%, #D4762A 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ── Navigation glass ── */
+.nav-glass {
+  background: rgba(250, 250, 248, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+/* ── Scroll reveal ── */
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ── Hero decorative ring ── */
+.hero-ring {
+  position: absolute;
+  border-radius: 50%;
+  border: 1px solid rgba(229, 169, 27, 0.15);
+}
+
+/* ── Dot pattern background ── */
+.dot-pattern {
+  background-image: radial-gradient(circle, #D9D3C7 0.8px, transparent 0.8px);
+  background-size: 24px 24px;
+}
+
+/* ── Product card hover ── */
+.product-card {
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+.product-card:hover {
+  transform: translateY(-6px);
+  box-shadow:
+    0 20px 60px -15px rgba(200, 134, 15, 0.15),
+    0 8px 24px -8px rgba(0, 0, 0, 0.06);
+}
+
+/* ── Highlight underline bar ── */
+.highlight-bar {
+  position: relative;
+}
+.highlight-bar::after {
+  content: '';
+  position: absolute;
+  bottom: 2px;
+  left: 0;
+  width: 100%;
+  height: 8px;
+  background: linear-gradient(90deg, rgba(229, 169, 27, 0.2), rgba(110, 142, 93, 0.15));
+  border-radius: 4px;
+  z-index: -1;
+}
+
+/* ── Feature icon circle ── */
+.feature-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+/* ── Custom scrollbar ── */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: #D9D3C7; border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: #B8B0A2; }

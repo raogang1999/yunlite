@@ -1,0 +1,53 @@
+---
+/** Hero — 首屏大标题 + CTA */
+---
+
+<section class="relative min-h-[92vh] flex items-center justify-center overflow-hidden">
+  <!-- Background decorative elements -->
+  <div class="absolute inset-0 pointer-events-none">
+    <div class="absolute top-0 left-0 right-0 h-[500px] bg-gradient-to-b from-warm-50/60 to-transparent"></div>
+    <div class="hero-ring w-[400px] h-[400px] top-[10%] right-[-100px] animate-float opacity-40"></div>
+    <div class="hero-ring w-[280px] h-[280px] bottom-[15%] left-[-60px] animate-float opacity-30" style="animation-delay: -2s;"></div>
+    <div
+      class="absolute top-1/3 left-1/2 -translate-x-1/2 w-[600px] h-[300px] rounded-full animate-glow"
+      style="background: radial-gradient(ellipse, rgba(229, 169, 27, 0.06) 0%, transparent 70%);"
+    ></div>
+  </div>
+
+  <!-- Content -->
+  <div class="relative z-10 text-center px-6 max-w-3xl mx-auto">
+    <h1 class="font-serif font-bold text-5xl sm:text-6xl md:text-7xl mb-3 text-warm-gradient leading-tight">
+      蕴光
+    </h1>
+    <p class="text-xs sm:text-sm tracking-[0.35em] text-gray-400 font-light uppercase mb-10">
+      Yunlite Studio
+    </p>
+
+    <p class="font-serif text-xl sm:text-2xl md:text-3xl text-gray-700 leading-relaxed mb-6 font-semibold">
+      让技术，服务于人的<span class="highlight-bar">自我实现</span>
+    </p>
+
+    <p class="text-gray-500 text-base sm:text-lg leading-relaxed max-w-xl mx-auto mb-12 font-light">
+      我们相信每个人心中都有一个想要成为的自己。<br class="hidden sm:block" />
+      用 AI 与技术，为你的成长之路铺路。
+    </p>
+
+    <a
+      href="#products"
+      class="inline-flex items-center gap-2 px-7 py-3.5 bg-gray-800 text-white rounded-full text-sm font-medium
+             hover:bg-gray-700 transition-all duration-300 shadow-lg shadow-gray-900/10 hover:shadow-xl hover:shadow-gray-900/15"
+    >
+      探索产品
+      <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"></path>
+      </svg>
+    </a>
+  </div>
+
+  <!-- Scroll indicator -->
+  <div class="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 opacity-40">
+    <div class="w-5 h-8 border-2 border-gray-400 rounded-full flex items-start justify-center p-1">
+      <div class="w-1 h-2 bg-gray-400 rounded-full animate-bounce"></div>
+    </div>
+  </div>
+</section>

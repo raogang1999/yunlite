@@ -1,0 +1,25 @@
+---
+/** Footer */
+const year = new Date().getFullYear();
+---
+
+<footer class="py-10 border-t border-cream-200">
+  <div class="max-w-5xl mx-auto px-6">
+    <div class="flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-gray-400">
+      <div class="flex items-center gap-2">
+        <span class="text-warm-gradient font-serif font-semibold">蕴光</span>
+        <span>&copy; {year} 蕴光工作室</span>
+      </div>
+      <div class="flex items-center gap-4">
+        <a
+          href="https://beian.miit.gov.cn/"
+          target="_blank"
+          rel="noopener"
+          class="hover:text-gray-600 transition-colors"
+        >
+          蜀ICP备XXXXXXXX号
+        </a>
+      </div>
+    </div>
+  </div>
+</footer>

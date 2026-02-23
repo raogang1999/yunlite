@@ -1,0 +1,86 @@
+---
+export interface Props {
+  title?: string;
+  description?: string;
+}
+
+const {
+  title = '蕴光工作室 | Yunlite Studio',
+  description = '让技术，服务于人的自我实现。蕴光工作室致力于用 AI 技术帮助每个人成为更好的自己。',
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="zh-CN" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="theme-color" content="#FAFAF8" />
+
+    <!-- Open Graph -->
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://yunlite.com" />
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Serif+SC:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  </head>
+  <body class="font-sans antialiased overflow-x-hidden">
+    <slot />
+
+    <!-- Scroll reveal & navbar scroll script -->
+    <script>
+      // Scroll reveal observer
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('visible');
+            }
+          });
+        },
+        { threshold: 0.15, rootMargin: '0px 0px -40px 0px' }
+      );
+      document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
+
+      // Navbar glass on scroll
+      const navbar = document.getElementById('navbar');
+      window.addEventListener(
+        'scroll',
+        () => {
+          if (!navbar) return;
+          if (window.pageYOffset > 60) {
+            navbar.classList.add('nav-glass', 'border-b', 'border-cream-200', 'shadow-sm');
+          } else {
+            navbar.classList.remove('nav-glass', 'border-b', 'border-cream-200', 'shadow-sm');
+          }
+        },
+        { passive: true }
+      );
+
+      // Smooth scroll for anchor links
+      document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+        anchor.addEventListener('click', function (e) {
+          e.preventDefault();
+          const href = (this as HTMLAnchorElement).getAttribute('href');
+          if (!href) return;
+          const target = document.querySelector(href);
+          if (target) {
+            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
+        });
+      });
+    </script>
+  </body>
+</html>
