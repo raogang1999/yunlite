@@ -1,9 +1,9 @@
 ---
 /** 固定顶部导航栏 — 滚动后出现毛玻璃效果 */
 const navLinks = [
-  { href: '#philosophy', label: '理念' },
-  { href: '#products', label: '产品' },
-  { href: '#contact', label: '联系' },
+  { href: '#philosophy', labelZh: '理念', labelEn: 'Philosophy' },
+  { href: '#products', labelZh: '产品', labelEn: 'Products' },
+  { href: '#contact', labelZh: '联系', labelEn: 'Contact' },
 ];
 ---
 
@@ -11,8 +11,20 @@ const navLinks = [
   <div class="max-w-5xl mx-auto px-6 py-5 flex items-center justify-between">
     <!-- Logo -->
     <a href="#" class="flex items-center gap-2.5 group">
-      <span class="text-warm-gradient font-serif text-xl font-bold tracking-wide">蕴光</span>
-      <span class="text-xs tracking-[0.2em] text-gray-400 font-light uppercase hidden sm:inline">
+      <span
+        class="text-warm-gradient font-serif text-xl font-bold tracking-wide"
+        data-i18n
+        data-zh="云砺"
+        data-en="Yunlite"
+      >
+        云砺
+      </span>
+      <span
+        class="text-xs tracking-[0.2em] text-gray-400 font-light uppercase hidden sm:inline"
+        data-i18n
+        data-zh="Yunlite Studio"
+        data-en="Yunlite Studio"
+      >
         Yunlite Studio
       </span>
     </a>
@@ -22,10 +34,24 @@ const navLinks = [
         <a
           href={link.href}
           class="text-gray-500 hover:text-warm-600 transition-colors duration-200"
+          data-i18n
+          data-zh={link.labelZh}
+          data-en={link.labelEn}
         >
-          {link.label}
+          {link.labelZh}
         </a>
       ))}
+      <button
+        type="button"
+        class="lang-toggle"
+        data-lang-toggle
+        data-lang="zh"
+        aria-label="Switch to English"
+      >
+        <span class="lang-zh">中文</span>
+        <span class="lang-divider">/</span>
+        <span class="lang-en">EN</span>
+      </button>
     </div>
   </div>
 </nav>

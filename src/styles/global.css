@@ -90,3 +90,35 @@ body {
 ::-webkit-scrollbar-track { background: transparent; }
 ::-webkit-scrollbar-thumb { background: #D9D3C7; border-radius: 3px; }
 ::-webkit-scrollbar-thumb:hover { background: #B8B0A2; }
+
+/* ── Language toggle button ── */
+.lang-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  padding: 4px 10px;
+  border: 1px solid #E0D9CE;
+  border-radius: 999px;
+  font-size: 0.7rem;
+  letter-spacing: 0.05em;
+  font-weight: 500;
+  color: #9C9488;
+  background: transparent;
+  cursor: pointer;
+  transition: border-color 0.2s, color 0.2s, background 0.2s;
+  white-space: nowrap;
+}
+.lang-toggle:hover {
+  border-color: #C8860F;
+  color: #C8860F;
+  background: rgba(229, 169, 27, 0.06);
+}
+.lang-divider {
+  opacity: 0.4;
+}
+/* Highlight active language */
+[data-lang-toggle][data-lang="zh"] .lang-zh,
+[data-lang-toggle][data-lang="en"] .lang-en {
+  color: #C8860F;
+  font-weight: 600;
+}

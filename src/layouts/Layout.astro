@@ -5,8 +5,8 @@ export interface Props {
 }
 
 const {
-  title = '蕴光工作室 | Yunlite Studio',
-  description = '让技术，服务于人的自我实现。蕴光工作室致力于用 AI 技术帮助每个人成为更好的自己。',
+  title = '云砺工作室 | Yunlite Studio',
+  description = '让技术，服务于人的自我实现。云砺工作室致力于用 AI 技术帮助每个人成为更好的自己。',
 } = Astro.props;
 ---
 
@@ -23,7 +23,7 @@ const {
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://yunlite.com" />
+    <meta property="og:url" content="https://www.yunlite.com" />
 
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -81,6 +81,42 @@ const {
           }
         });
       });
+
+      // Language toggle (ZH / EN)
+      const langToggle = document.querySelector('[data-lang-toggle]');
+      const i18nElements = document.querySelectorAll('[data-i18n]');
+
+      const applyLang = (lang) => {
+        const normalized = lang === 'en' ? 'en' : 'zh';
+        document.documentElement.setAttribute('lang', normalized === 'en' ? 'en' : 'zh-CN');
+
+        i18nElements.forEach((el) => {
+          const value = el.getAttribute(`data-${normalized}`);
+          if (value !== null) {
+            el.innerHTML = value;
+          }
+        });
+
+        if (langToggle) {
+          langToggle.setAttribute('data-lang', normalized);
+          langToggle.setAttribute(
+            'aria-label',
+            normalized === 'en' ? 'Switch to Chinese' : 'Switch to English'
+          );
+        }
+      };
+
+      const storedLang = localStorage.getItem('site-lang');
+      applyLang(storedLang === 'en' ? 'en' : 'zh');
+
+      if (langToggle) {
+        langToggle.addEventListener('click', () => {
+          const current = langToggle.getAttribute('data-lang') === 'en' ? 'en' : 'zh';
+          const next = current === 'en' ? 'zh' : 'en';
+          localStorage.setItem('site-lang', next);
+          applyLang(next);
+        });
+      }
     </script>
   </body>
 </html>

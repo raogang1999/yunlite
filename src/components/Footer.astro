@@ -1,4 +1,4 @@
----
+﻿---
 /** Footer */
 const year = new Date().getFullYear();
 ---
@@ -7,8 +7,13 @@ const year = new Date().getFullYear();
   <div class="max-w-5xl mx-auto px-6">
     <div class="flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-gray-400">
       <div class="flex items-center gap-2">
-        <span class="text-warm-gradient font-serif font-semibold">蕴光</span>
-        <span>&copy; {year} 蕴光工作室</span>
+        <span class="text-warm-gradient font-serif font-semibold"
+          data-i18n data-zh="云砺" data-en="Yunlite">云砺</span>
+        <span
+          data-i18n
+          data-zh={`© ${year} 龙岩市新罗区云砺信息咨询服务部`}
+          data-en={`© ${year} Yunlite Studio`}
+        >© {year} 龙岩市新罗区云砺信息咨询服务部</span>
       </div>
       <div class="flex items-center gap-4">
         <a
@@ -17,7 +22,7 @@ const year = new Date().getFullYear();
           rel="noopener"
           class="hover:text-gray-600 transition-colors"
         >
-          蜀ICP备XXXXXXXX号
+          闽ICP备XXXXXXXX号
         </a>
       </div>
     </div>
